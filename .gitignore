@@ -1,0 +1,14 @@
+# Secrets and operational backups
+.env
+.env.*
+!.env.example
+*.backup
+*.key
+*.pem
+id_rsa*
+id_ed25519*
+# Evidence and local state
+evidence/
+*.log
+.DS_Store
+__pycache__/
