@@ -16,7 +16,8 @@ flowchart TB
  C1 ---|HA/Transit 10.255.255.0/30| C2
  C1 --- CORE[SW-CORE]
  C2 --- CORE
- MG[ZN-SERVER-MGMT] --- SM[SW-MGMT]
+ MAC[MacBook / WinBox] ---|Tailscale| ZN[zn-server]
+ ZN ---|tap-gns3-mgmt 10.50.250.1/24| SM[SW-MGMT]
  SM --- C1
  SM --- C2
  CORE --- U[VLAN10 USERS]
@@ -31,13 +32,16 @@ flowchart TB
 - SW-CORE: bridge1, vlan-filtering=no al inicio.
 - SW-MGMT: bridge-MGMT, red OOB 10.50.250.0/24.
 - Enlaces HA y OOB verificados con 0% de pérdida.
+- Acceso WinBox remoto por Tailscale/OOB validado contra CCR01 y CCR02.
+- TAP de management persistente mediante systemd y validado tras reboot.
 
 ## Fases
-1. Baseline e inventario — EN CURSO.
-2. VLAN 10/20/30/99 y trunks CCR↔SW-CORE.
-3. VRRP por VLAN.
-4. Routing interno y OSPF área 0 donde aporte valor.
-5. Dual WAN y failover.
-6. Firewall y segmentación.
-7. Observabilidad y fallos controlados.
-8. Evidencia y cierre.
+1. Baseline e inventario — PASS.
+2. OOB Management persistente — PASS.
+3. VLAN 10/20/30/99 y trunks CCR↔SW-CORE — NEXT.
+4. VRRP por VLAN.
+5. Routing interno y OSPF área 0 donde aporte valor.
+6. Dual WAN y failover.
+7. Firewall y segmentación.
+8. Observabilidad y fallos controlados.
+9. Evidencia y cierre.
