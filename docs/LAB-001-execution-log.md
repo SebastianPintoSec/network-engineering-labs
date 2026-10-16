@@ -1,20 +1,22 @@
 # LAB-001 — Bitácora de ejecución
 
-**Estado: NOT STARTED**
+## 2026-10-16 — Baseline
 
-## Inventario pendiente
+| Componente | Resultado |
+|---|---|
+| CCR01 | RouterOS 7.23.7 long-term, 512 MiB |
+| CCR02 | RouterOS 7.23.7 long-term, 512 MiB |
+| SW-CORE | RouterOS 7.23.7 long-term, 256 MiB |
+| SW-MGMT | RouterOS 7.23.7 long-term, 256 MiB |
+| HA/Transit | PASS — CCR01↔CCR02, 0% pérdida |
+| OOB-MGMT | PASS — CCR01↔CCR02 vía SW-MGMT, 0% pérdida |
+| SW-CORE VLAN filtering | Deshabilitado; VLANs aún no implementadas |
+| VLAN interfaces CCR | Ninguna al inicio |
 
-| Componente | Versión | CPU/RAM | Interfaces | Validado |
-|---|---|---|---|---|
-| GNS3 Server | Pendiente | Pendiente | — | No |
-| CHR EDGE | Pendiente | Pendiente | Pendiente | No |
-| ISP1 / ISP2 | Pendiente | Pendiente | Pendiente | No |
-| Switch VLAN-aware | Pendiente | Pendiente | Pendiente | No |
-| Clientes Linux | Pendiente | Pendiente | Pendiente | No |
+### Direcciones existentes
+CCR01: WAN1 198.51.100.2/29, WAN2 203.0.113.2/29, HA 10.255.255.1/30, OOB 10.50.250.11/24.
 
-## Cambios y evidencia
-| Fecha | Cambio | Prueba | Resultado | Evidencia |
-|---|---|---|---|---|
-| — | Diseño inicial | — | No ejecutado | — |
+CCR02: WAN1 198.51.100.3/29, WAN2 203.0.113.3/29, HA 10.255.255.2/30, OOB 10.50.250.12/24.
 
-Guardar registros, capturas y exports revisados en `evidence/` local; no publicar secretos ni materiales de clientes.
+### Observaciones
+Los reinicios previos sin apagado correcto aparecen en logs de RouterOS, pero no afectan las pruebas de conectividad del baseline. La siguiente etapa es VLAN/trunking en SW-CORE y subinterfaces VLAN en ambos CCR.
