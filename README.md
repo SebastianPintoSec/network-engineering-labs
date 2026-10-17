@@ -1,14 +1,39 @@
 # Network Engineering Labs
 
-Laboratorios reproducibles de ingeniería de redes centrados en **MikroTik RouterOS v7**, **GNS3** y Linux.
+Laboratorios reproducibles de ingeniería de redes con foco en **MikroTik RouterOS v7, Cisco IOS/IOS-XE, Ubiquiti, alta disponibilidad, routing, switching, Wi-Fi y seguridad**.
 
-> **Estado actual: DESIGN / NOT VALIDATED.** La arquitectura aún no está implementada ni probada en GNS3.
+> **Estado actual: PHYSICAL LAB / BUILD IN PROGRESS.**  
+> LAB-001 migró desde una maqueta GNS3 a una implementación física multivendor. El entorno virtual se conserva como sandbox/twin para diseño y pruebas rápidas.
 
-## LAB-001 — Enterprise Network Architecture
+## LAB-001 — Enterprise Physical Network Architecture
 
-Diseño de una red empresarial segmentada con VLAN 10 (usuarios), VLAN 20 (servicios), VLAN 80 (gestión), un CHR perimetral y dos ISP simulados. El primer hito es validar segmentación y firewall; el failover se incorpora después.
+Laboratorio empresarial físico orientado a validar una arquitectura **dual-ISP + dual-edge + core/distribution + access + WLAN + branch**.
+
+### Inventario principal
+
+- MikroTik RB4011 #1 — upstream real / ISP simulator.
+- MikroTik RB5009 — distribución de los dominios WAN simulados.
+- MikroTik RB4011 #2 — edge router 01.
+- MikroTik CCR1009 — edge router 02.
+- Cisco Catalyst 3850 — core/distribution.
+- Ubiquiti Pro Switch — access layer.
+- Ubiquiti U6 — WLAN.
+- Cisco ISR 4451 — branch router.
+- Clientes/servidores físicos para validación.
+
+### Objetivo de alta disponibilidad
+
+Los dos routers Edge tendrán acceso a **ISP-A e ISP-B**. La primera implementación utilizará un modelo **activo-pasivo**:
+
+- RB4011 EDGE01: router preferido.
+- CCR1009 EDGE02: router de respaldo.
+- Si falla un ISP, el router activo puede continuar por el otro.
+- Si falla el router activo, el router secundario conserva acceso a ambos ISP.
+
+Una fase posterior podrá comparar este diseño con active-active.
 
 ### Documentación
+
 - [Arquitectura y fases](docs/LAB-001-architecture.md)
 - [Plan IP](docs/LAB-001-addressing.md)
 - [Seguridad](docs/LAB-001-security.md)
@@ -21,6 +46,6 @@ Diseño de una red empresarial segmentada con VLAN 10 (usuarios), VLAN 20 (servi
 
 No publicar credenciales, direcciones de clientes, respaldos binarios, secretos ni configuraciones operativas reales. Documentar versiones, prerequisitos, pruebas, evidencias y limitaciones. No afirmar resultados sin ejecutarlos.
 
-**Próximo paso:** verificar inventario real de GNS3 y CHR, mapear interfaces y ejecutar fase A.
+**Próximo paso:** implementar la distribución física WAN en RB5009 y validar ISP-A/ISP-B hacia ambos routers Edge.
 
 **Licencia:** pendiente de definir; el acceso público no implica licencia de reutilización.
