@@ -6,14 +6,6 @@ Laboratorios reproducibles de ingeniería de redes con foco en **MikroTik Router
 > LAB-001 migró desde una maqueta GNS3 a una implementación física multivendor. El entorno virtual se conserva como sandbox/twin para diseño y pruebas rápidas.
 
 
-## LAB 01 — FortiGate Dual WAN / SD-WAN (implementación actual)
-
-Registro técnico de FortiGate 80F PoE con **FortiOS 7.0.12 build 0523**, RB4011 como simulador de dos ISP y Ubiquiti USW Pro como capa de acceso. Conectividad individual de WAN1/WAN2 validada; **SD-WAN y failover automático pendientes**.
-
-- [Documentación del LAB 01 FortiGate](labs/LAB-01-fortigate-dual-wan/README.md)
-
-> Esta implementación está documentada de forma independiente respecto del diseño histórico LAB-001 descrito más abajo.
-
 ## LAB-001 — Enterprise Physical Network Architecture
 
 Laboratorio empresarial físico orientado a validar una arquitectura **dual-ISP + dual-edge + core/distribution + access + WLAN + branch**.
